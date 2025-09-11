@@ -1,3 +1,4 @@
+import { Tokens } from "@/lib/types";
 import { AUTH_URL } from "@/lib/urls";
 
 export const loginWithGoogle = async (returnUrl: string): Promise<string> => {
@@ -19,4 +20,18 @@ export const loginWithGoogle = async (returnUrl: string): Promise<string> => {
     console.error("Error during Google login:", error);
     throw error;
   }
+};
+
+export const getTokens = async (refreshToken: string): Promise<Tokens> => {
+  const url = `${AUTH_URL}refresh`;
+  const resp = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${refreshToken}`,
+    },
+  });
+  if (!resp.ok) {
+    throw Error("Error on refreshing tokens!");
+  }
+  const data: Tokens = await resp.json();
+  return data;
 };
