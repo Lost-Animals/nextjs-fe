@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Header />
-          <main className="min-h-screen">{children}</main>
+          <main className="min-h-screen max-w-screen-xl mx-auto px-4">{children}</main>
         </ThemeProvider>
       </body>
     </html>
